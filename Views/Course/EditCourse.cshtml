@@ -1,0 +1,55 @@
+﻿@model Interface.Models.EditCourseViewModel
+@{
+    ViewBag.Title = "Modifică curs";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("EditCourse", "Course",new { id = @ViewBag.CourseId }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.CourseName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.CourseName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.CourseDay, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.CourseDay,
+                new List<SelectListItem> {
+                    new SelectListItem { Value = "Default" , Text = "-" },
+                       new SelectListItem { Value = "Luni" , Text = "Luni" },
+                       new SelectListItem { Value = "Marti" , Text = "Marți" },
+                       new SelectListItem { Value = "Miercuri" , Text = "Miercuri" },
+                       new SelectListItem { Value = "Joi" , Text = "Joi" },
+                       new SelectListItem { Value = "Vineri", Text = "Vineri" },
+             }, new { @class = "myselect" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.CourseHour, new { @class = "col-md-2 control-label"} )
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.CourseHour, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.CourseProfessor, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.CourseProfessor, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Salveaza" class="btn btn-default" />
+            @Html.ActionLink("Înapoi", "Index", "Course", new { @class = "btn btn-default col-md-offset-1" })
+        </div>
+    </div>
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

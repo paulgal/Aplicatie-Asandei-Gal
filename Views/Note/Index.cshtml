@@ -1,0 +1,77 @@
+﻿@model IEnumerable<InterfaceModelClasses.Models.NoteModel>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/Content/bootstrap.css">
+    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="js/jquery-1.7.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+    <h1 text-align center> @ViewBag.CourseName</h1>
+    @if (Model.ToList().Count > 0)
+    {
+        <div id="text-carousel" class="carousel slide" data-ride="carousel">
+            <div class="row">
+                <div class="col-xs-offset-3 col-xs-6">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="carousel-content">
+                                <div>
+                                    <p>Notițele pentru cursul @ViewBag.CourseName</p>
+                                </div>
+                            </div>
+                        </div>
+                        @foreach (var note in Model)
+                {
+                            <div class="item">
+                                <div class="carousel-content">
+                                    <div>
+                                        <p>@note.Information</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <a data-slide="prev" href="#text-carousel" class="left carousel-control">‹</a>
+            <a data-slide="next" href="#text-carousel" class="right carousel-control">›</a>
+        </div>
+    }
+    else
+    {
+        <div class="container" text-align center>
+            <br /><br />
+            <h2>Nu aveți notițe adăugate pentru acest curs</h2>
+        </div>
+    }
+    <div class="container">
+        <hr />
+        <br />
+        <h2>Adaugă notițe</h2>
+    </div>
+    @using (Html.BeginForm("AddNote", "Note", new { id = ViewBag.CourseId }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "AddNote" }))
+    {
+        <div class="container">
+            <textarea name="Content" id="Content" form="AddNote" rows="10" cols="50" class="col-md-offset-0"></textarea>
+            <div class="form-group">
+                <div class="col-md-offset-1">
+                    <input type="submit" value="Adaugă" id="AddNote" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+
+</body>
+
+</html>
+<script>
+    @Scripts.Render("~/bundles/jqueryval")
+</script>

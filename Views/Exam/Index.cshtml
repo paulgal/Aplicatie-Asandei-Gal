@@ -1,0 +1,60 @@
+﻿@model IEnumerable<InterfaceModelClasses.Models.ExamModel>
+@using Calculation;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/Content/bootstrap.css">
+    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <br /><br />
+        <h1>Examenele mele:</h1>
+        <table id="courses" cellspacing="0" cellpadding="0" class="table table-condensed table-hover table-striped ">
+            <thead>
+                <tr>
+                <tr>
+                    <th>Materia examenului</th>
+                    <th>Data</th>
+                    <th>Zile până la examen</th>
+                    <th>Ora</th>
+                    <th>Sala</th>
+                    <th>Dificultate</th>
+                    <th>Acțiuni</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var exam in Model)
+                {
+
+                    <tr>
+
+                        <td>@exam.CourseName</td>
+                        <td>@exam.Date.ToString("dd.MM.yyyy")</td>
+                        <td>@CalculationClass.CalculateNumberOfDaysTillActivity(exam.Date)</td>
+                        <td>@exam.Hour</td>
+                        <td>@exam.Room</td>
+                        <td>@exam.Difficulty</td>
+                        <td>
+                            @Html.ActionLink("Modifica", "EditExam", new { id = @exam.Id }) |
+                            @Html.ActionLink("Șterge", "Delete", new { id = @exam.Id }, new { onclick = "return confirm('Sunteti sigur ca vreti sa stergeti examenul?');" }) <br />
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.ActionLink("Adaugă examen", "AddExam", null, new { @class = "btn btn-default" })
+    </div>
+</body>
+
+</html>
+<script>
+    $(function () {
+        $('#courses').tablesorter();
+    });
+        @Scripts.Render("~/bundles/jqueryval")
+</script>

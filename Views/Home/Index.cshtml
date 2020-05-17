@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Student Organizer</h1>
+    <p class="lead"></p>
+    <div class="row">
+        <div class="col-md-3">
+            <a href="http://www.unitbv.ro/" class="btn btn-info" role="button">Universitatea Transilvania</a>
+        </div>
+        <div class="col-md-4">
+            <a href="http://www.unitbv.ro/Default.aspx?alias=www.unitbv.ro/mi&" class="btn btn-info" role="button"> Facultatea de Matematică și Informatică</a>
+        </div>
+        <div class="col-md-3">
+            <a href="https://xu.unitbv.ro/" class="btn btn-info" role="button"> Mail Studenți </a>
+        </div>
+        <div class="col-md-2">
+            <a href="https://elearning.unitbv.ro/login/index.php" class="btn btn-info"role="button"> E-Learning</a>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Următoarea zi din săptămâna este @ViewBag.NextDay </h2>
+        <h3>Cursuri</h3>
+        @if (ViewBag.CourseList.Count > 0)
+        {
+            foreach (var course in ViewBag.CourseList)
+            {
+                <b class="glyphicon-bold">
+                    @course.Name de la ora @course.Hour cu profesorul @course.Professor .
+                </b>
+                <br />
+            }
+        }
+        else
+        {
+            <b>
+                Nu aveți cursuri în această zi.
+            </b>
+        }
+
+    </div>
+    <div class="col-md-6">
+        <h2>Examene</h2>
+        @if (ViewBag.NextExam != null)
+        {
+            <b>
+                Zile pana la următorul examen : @ViewBag.DaysTillTheNextExam
+            </b>
+            <br />
+            <b >
+                Următorul examen va fi la materia @ViewBag.NextExam.CourseName la ora @ViewBag.NextExam.Hour in sala @ViewBag.NextExam.Room .
+            </b>
+
+        }
+        else
+        {
+            <b>
+                Nu aveți niciun examen în perioada următoare.
+            </b>
+        }
+    </div>
+</div>

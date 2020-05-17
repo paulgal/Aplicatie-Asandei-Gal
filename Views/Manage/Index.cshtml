@@ -1,0 +1,33 @@
+﻿@model Interface.Models.IndexViewModel
+@{
+    ViewBag.Title = "Setările contului";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4>Modifica setarile contului</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Informatii personale:</dt>
+        <dd>
+            @Html.ActionLink("Modifică informațiile personale", "ChangeUserAccountSettings")
+        </dd>
+        <dt>Parola:</dt>
+        <dd>
+            @if (Model.HasPassword)
+            {
+                @Html.ActionLink("Schimbă parolă", "ChangePassword")
+            }
+            else
+            {
+                @Html.ActionLink("Creaza", "SetPassword")
+            }
+        </dd>
+        <dt>Setari activitati:</dt>
+        <dd>
+                @Html.ActionLink("Modifică setările activităților", "ChangeActivitySettings")
+        </dd>
+    </dl>
+</div>
